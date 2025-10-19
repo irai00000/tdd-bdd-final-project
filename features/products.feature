@@ -98,11 +98,18 @@ Scenario: Update a Product
     Then I should see "Updated red fedora" in the results
 
 
-Scenario: Delete a Product
-    When I visit the "Home Page"
-    And I set the "Id" to "1"
+Scenario: The user can delete a product
+    When I search for "iPhone"
+    Then I should see the message "Success"
+    And I should see the field "name" with value "iPhone"
+    When I copy the "id" field
+    And I clear the form
+    And I paste the "id" field
     And I press the "Delete" button
-    Then I should see the message "Product has been deleted!"
+    Then I should see the message "Product has been Deleted!"
+    When I press the "Clear" button
+    And I press the "Search" button
+    Then I should not see "iPhone" in the results
 
 Scenario: List all Products
     When I visit the "Home Page"
