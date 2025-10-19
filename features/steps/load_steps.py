@@ -47,6 +47,8 @@ def step_impl(context):
     # load the database with new products
     #
     for row in context.table:
+        Product.create(name=row['name'], category=row['category'], price=row['price'])
+
         #
         # ADD YOUR CODE HERE TO CREATE PRODUCTS VIA THE REST API
         #
