@@ -111,13 +111,14 @@ Scenario: The user can delete a product
     And I press the "Search" button
     Then I should not see "iPhone" in the results
 
-Scenario: List all Products
-    When I visit the "Home Page"
-    And I press the "Retrieve All" button
+Scenario: The user can list all products
+    When I press the "Clear" button
+    And I press the "Search" button
     Then I should see the message "Success"
     And I should see "Hat" in the results
     And I should see "Shoes" in the results
     And I should see "Big Mac" in the results
+    And I should see "Sheets" in the results
 
 Scenario: Find Products by Name
     When I visit the "Home Page"
