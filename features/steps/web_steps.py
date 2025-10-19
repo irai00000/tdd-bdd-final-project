@@ -2,7 +2,7 @@
 # Copyright 2016, 2021 John J. Rofrano. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
+# You may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 # https://www.apache.org/licenses/LICENSE-2.0
@@ -105,6 +105,38 @@ def step_impl(context, element_name):
 ##################################################################
 
 ## UPDATE CODE HERE ##
+# --- Task 7a: Button Click ---
+@when('I press the "{button_text}" button')
+def step_impl(context, button_text):
+    button_id = button_text.lower() + '-btn'
+    button = WebDriverWait(context.driver, context.wait_seconds).until(
+        expected_conditions.element_to_be_clickable((By.ID, button_id))
+    )
+    button.click()
+
+# --- Task 7b: Verify text is present ---
+@then('I should see "{text_string}" in the results')
+def step_impl(context, text_string):
+    element = WebDriverWait(context.driver, context.wait_seconds).until(
+        expected_conditions.presence_of_element_located((By.TAG_NAME, 'body'))
+    )
+    assert(text_string in element.text)
+
+# --- Task 7c: Verify text is NOT present ---
+@then('I should not see "{text_string}" in the results')
+def step_impl(context, text_string):
+    element = WebDriverWait(context.driver, context.wait_seconds).until(
+        expected_conditions.presence_of_element_located((By.TAG_NAME, 'body'))
+    )
+    assert(text_string not in element.text)
+
+# --- Task 7d: Verify message is present ---
+@then('I should see the message "{message}"')
+def step_impl(context, message):
+    element = WebDriverWait(context.driver, context.wait_seconds).until(
+        expected_conditions.presence_of_element_located((By.ID, 'message'))
+    )
+    assert(message in element.text)
 
 ##################################################################
 # This code works because of the following naming convention:
