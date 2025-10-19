@@ -72,12 +72,31 @@ Scenario: Retrieve a Product
 
 Scenario: Update a Product
     When I visit the "Home Page"
-    And I set the "Id" to "1"
-    And I press the "Retrieve" button
-    And I change "Description" to "Updated red fedora"
+    And I set the "Name" to "Hat"
+    And I press the "Search" button
+    Then I should see the message "Success"
+    And I should see "Hat" in the "Name" field
+    And I should see "A red fedora" in the "Description" field
+
+    # Change the product description
+    When I change "Description" to "Updated red fedora"
     And I press the "Update" button
     Then I should see the message "Success"
+
+    # Verify the change using the Id
+    When I copy the "Id" field
+    And I press the "Clear" button
+    Then the "Id" field should be empty
+    When I paste the "Id" field
+    And I press the "Retrieve" button
+    Then I should see the message "Success"
     And I should see "Updated red fedora" in the "Description" field
+
+    # Verify it appears in the search results
+    When I press the "Clear" button
+    And I press the "Search" button
+    Then I should see "Updated red fedora" in the results
+
 
 Scenario: Delete a Product
     When I visit the "Home Page"
