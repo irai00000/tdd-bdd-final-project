@@ -120,13 +120,6 @@ Scenario: The user can list all products
     And I should see "Big Mac" in the results
     And I should see "Sheets" in the results
 
-Scenario: Find Products by Name
-    When I visit the "Home Page"
-    And I set the "Name" to "Hat"
-    And I press the "Search" button
-    Then I should see the message "Success"
-    And I should see "Hat" in the results
-
 Scenario: The user can search for products by category
     When I press the "Clear" button
     And I select "FOOD" in the "Category" dropdown
@@ -146,4 +139,14 @@ Scenario: The user can search for products by availability
     And I should see "Hat" in the results
     And I should see "Big Mac" in the results
     And I should not see "Shoes" in the results
+    And I should not see "Sheets" in the results
+
+Scenario: The user can search for a product by name
+    When I press the "Clear" button
+    And I set the "Name" to "Hat"
+    And I press the "Search" button
+    Then I should see the message "Success"
+    And I should see "Hat" in the results
+    And I should not see "Shoes" in the results
+    And I should not see "Big Mac" in the results
     And I should not see "Sheets" in the results
